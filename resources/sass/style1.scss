@@ -1,0 +1,15 @@
+$color:red;
+$bgcolor:green;
+$font: helvetica;
+
+h1 {
+    color: $color;
+    background-color: $bgcolor;
+    font-family: $font;
+}
+
+p {
+    color: $bgcolor;
+    background-color: $color;
+    font-family: $font;
+}
