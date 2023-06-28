@@ -78,6 +78,7 @@
         <br>
         <input type="submit" value="Register" name="reg" id="reg1">
     </form>
+    <br>
 </body>
 
 </html>
