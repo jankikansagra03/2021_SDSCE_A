@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Registration;
 
 class SampleController extends Controller
 {
@@ -19,7 +20,7 @@ class SampleController extends Controller
             'hobby' => 'required',
             'qualification' => 'required',
             'address' => 'required',
-            'pic' => 'required|max:100|mimes:jpg,png,gif,bmp'
+            'pic' => 'required|max:300|mimes:jpg,png,gif,bmp'
 
         ], [
             'fn.required' => 'Full name cannot be empty',
@@ -42,9 +43,42 @@ class SampleController extends Controller
             'gender.required' => 'Please select your Gender',
             'age.required' => 'Please enter your age'
         ]);
-        $hobbies = $req->input('hobby');
-        $pic_name = $req->file('pic')->getClientOriginalName();
+        $h = "";
+        foreach ($req->hobby as $a) {
+            $h = $h . $a . ",";
+        }
+        $pic_name = uniqid() . $req->file('pic')->getClientOriginalName();
         $req->pic->move('Images/profile_pictures', $pic_name);
-        return view('display_registeer', compact('req', 'hobbies'));
+        $reg = new Registration();
+        $reg->fullname = $req->fn;
+        $reg->email = $req->em;
+        $reg->password = $req->pwd;
+        $reg->mobile = $req->mobile;
+        $reg->gender = $req->gender;
+        $reg->qualification = $req->qualification;
+        $reg->age = $req->age;
+        $reg->hobbies = $h;
+        $reg->address = $req->address;
+        $reg->pic = $pic_name;
+        if ($reg->save()) {
+            session()->flash('succ', 'Data saved successfully');
+        } else {
+            session()->flash('err', 'error in saving data');
+        }
+        return view('register');
+    }
+    public function fetch_registration_data()
+    {
+        $data = Registration::select()->get();
+        return view('Display_registration', compact('data'));
+    }
+    public function edit_registered_user($email)
+    {
+        $data = Registration::where('email', $email)->get();
+        return view('display_data_for_edit', compact('data'));
+    }
+    public function update_registration()
+    {
+        return "hello";
     }
 }

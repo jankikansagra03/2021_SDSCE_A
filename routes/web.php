@@ -24,4 +24,9 @@ Route::view('Aboutus', 'about');
 Route::view('contactus', 'contact');
 Route::view('register', 'register');
 Route::post('FetchRegister', [SampleController::class, 'fetch_data_register']);
+Route::get('Fetch_Registration', [SampleController::class, 'fetch_registration_data']);
 Route::view('Login', 'login');
+Route::get('edit_registration/{email}', [SampleController::class, 'edit_registered_user']);
+Route::post('EditFetchRegister', [SampleController::class, 'update_registration']);
+
+

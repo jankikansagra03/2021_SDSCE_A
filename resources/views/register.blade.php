@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+@if (session('succ'))
+    <p style="color:green;">{{ session('succ') }}</p>
+@endif
+@if (session()->has('err'))
+    <p style="color:red;">{{ session('err') }}</p>
+@endif
 
 <head>
     <meta charset="UTF-8">
@@ -92,8 +98,7 @@
         <select name="qualification" id="qualification1">
             <option value="Under Graduate" @if (old('qualification') == 'Under Graduate') selected @endif>Under Graduate</option>
             <option value="Graduate" @if (old('qualification') == 'Graduate') selected @endif>Graduate</option>
-            <option value="Post Graduate" @
-            if (old('qualification') == 'Post Graduate') selected @endif>Post Graduate</option>
+            <option value="Post Graduate" @if (old('qualification') == 'Post Graduate') selected @endif>Post Graduate</option>
             <option value="Doctorate" @if (old('qualification') == 'Doctorate') selected @endif>Doctorate</option>
             <option value="Post Doctorate" @if (old('qualification') == 'Post Doctorate') selected @endif>Post Doctorate</option>
         </select>
