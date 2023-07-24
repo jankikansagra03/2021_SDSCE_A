@@ -131,4 +131,29 @@ class SampleController extends Controller
         }
         return redirect('Fetch_Registration');
     }
+    public function delete_user_registration($email)
+    {
+        $result = Registration::where('email', $email)->update(array('status' => 'deleted'));
+        if ($result) {
+            return $this->fetch_registration_data();
+        }
+    }
+    public function deactivate_user($email)
+    {
+        $result = Registration::where('email', $email)->update(array('status' => 'Inactive'));
+        if ($result) {
+            return $this->fetch_registration_data();
+        }
+    }
+    public function activate_user($email)
+    {
+        $result = Registration::where('email', $email)->update(array('status' => 'Active'));
+        if ($result) {
+            return $this->fetch_registration_data();
+        }
+    }
+    public function reactivate_user($email)
+    {
+        
+    }
 }

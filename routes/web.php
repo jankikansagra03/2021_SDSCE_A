@@ -28,5 +28,7 @@ Route::get('Fetch_Registration', [SampleController::class, 'fetch_registration_d
 Route::view('Login', 'login');
 Route::get('edit_registration/{email}', [SampleController::class, 'edit_registered_user']);
 Route::post('EditFetchRegister', [SampleController::class, 'update_registration']);
-
-
+Route::get('delete_registration/{email}', [SampleController::class, 'delete_user_registration']);
+Route::get('deactivate_user/{email}', [SampleController::class, 'deactivate_user']);
+Route::get('activate_user/{email}', [SampleController::class, 'activate_user']);
+Route::get('reactivate_user/{email}', [SampleController::class, 'reactivate_user']);

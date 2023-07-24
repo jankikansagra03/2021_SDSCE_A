@@ -27,16 +27,25 @@
             <td>{{ $d['hobby'] }}</td>
             <td>{{ $d['qualification'] }}</td>
             <td>{{ $d['address'] }}</td>
-            <td><img src="Images/profile_pictures/{{ $d['pic'] }}" alt="" height="100px" width="100px"> </td>
+            <td><img src="{{ URL::to('/') }}/Images/profile_pictures/{{ $d['pic'] }}" alt="" height="100px"
+                    width="100px"> </td>
             <td>{{ $d['role'] }}</td>
             <td>{{ $d['status'] }}</td>
-            <td><a href="edit_registration/{{ $d['email'] }}"><input type="button" value="Edit"></a></td>
-            <td><a href="delete_registration/{{ $d['email'] }}"><input type="button" value="Delete"></a< /td>
+            <td><a href="{{ URL::to('/') }}/edit_registration/{{ $d['email'] }}"><input type="button"
+                        value="Edit"></a></td>
+            <td><a href="{{ URL::to('/') }}/delete_registration/{{ $d['email'] }}"><input type="button"
+                        value="Delete">
+                    </a< /td>
             <td>
                 @if ($d['status'] == 'Active')
-                    <a href="deactivate_user/{{ $d['email'] }}"><input type="button" value="Deactivate"></a>
+                    <a href="{{ URL::to('/') }}/deactivate_user/{{ $d['email'] }}"><input type="button"
+                            value="Deactivate"></a>
+                @elseif($d['status'] == 'Inactive')
+                    <a href="{{ URL::to('/') }}/activate_user/{{ $d['email'] }}"><input type="button"
+                            value="Activate"></a>
                 @else
-                    <a href="activate_user/{{ $d['email'] }}"><input type="button" value="Activate"></a>
+                    <a href="{{ URL::to('/') }}/reactivate_user/{{ $d['email'] }}"><input type="button"
+                            value="Reactivate"></a>
                 @endif
             </td>
         </tr>

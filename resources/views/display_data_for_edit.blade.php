@@ -146,5 +146,3 @@
 </body>
 
 </html>
-http://127.0.0.1:8000/edit_registration/
-http://127.0.0.1:8000/EditFetchRegister
