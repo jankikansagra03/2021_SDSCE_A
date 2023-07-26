@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Registration;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 
 class SampleController extends Controller
 {
@@ -82,7 +83,6 @@ class SampleController extends Controller
     {
         $req->validate([
             'fn' => 'required|min:3|max:20',
-            'em' => 'required|email',
             'pwd' => 'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/',
             'pwd_confirmation' => 'required',
             'age' => 'required',
@@ -97,8 +97,6 @@ class SampleController extends Controller
             'fn.required' => 'Full name cannot be empty',
             'fn.min' => 'Full name must contain minimum 3 characters',
             'fn.max' => 'Full name must contain maximum of 30 characters',
-            'em.required' => 'Email address canniot be empty',
-            'em.email' => 'invalid email address',
             'pwd.required' => 'Password field cannot be empty',
             'pwd.regex' => 'Password must contain one small letter one capital letter, one number and one special symbol',
             'pwd.confirmed' => 'Password and Confirm Password must match',
@@ -154,6 +152,17 @@ class SampleController extends Controller
     }
     public function reactivate_user($email)
     {
-        
+    }
+
+    public function send_email(Request $req)
+    {
+        $email = $req->em;
+        $fn = $req->fn;
+        $data = ['email' => $email, 'fullname' => $fn];
+        Mail::send('mail_template', ['data' => $data], function ($message) use ($data) {
+            $message->to($data['email'], $data['fullname']);
+            $message->attach("images/profile_pictures/64a507e3874adScreenshot (23).png");
+            $message->from("janki.kansagra@rku.ac.in", "Janki Kansagra");
+        });
     }
 }

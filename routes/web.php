@@ -32,3 +32,5 @@ Route::get('delete_registration/{email}', [SampleController::class, 'delete_user
 Route::get('deactivate_user/{email}', [SampleController::class, 'deactivate_user']);
 Route::get('activate_user/{email}', [SampleController::class, 'activate_user']);
 Route::get('reactivate_user/{email}', [SampleController::class, 'reactivate_user']);
+Route::view('mail_sample', 'mail_form');
+Route::post('send_email', [SampleController::class, 'send_email']);

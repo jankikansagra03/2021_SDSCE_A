@@ -87,7 +87,7 @@
             Select your Hobby:
             <br>
             <input type="checkbox" name="hobby[]" id="hobby1" value="Playing Sports"
-                @if (is_array($h1) && in_array('Playing Sports', $h1)) chec0ked @endif />Playing Sports
+                @if (is_array($h1) && in_array('Playing Sports', $h1)) checked @endif />Playing Sports
             <br>
             <input type="checkbox" name="hobby[]" id="hobby1" value="Reading"
                 @if (is_array($h1) && in_array('Reading', $h1)) checked @endif />Reading
